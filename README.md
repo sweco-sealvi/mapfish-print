@@ -1,6 +1,16 @@
 Please read the documentation available here:
 http://trac.mapfish.org/trac/mapfish/wiki/PrintModuleDoc
 
+NOTE: This fork was created because official 1.2-SNAPSHOT has severe regressions after spring dependency
+was introduced. The fork was done based on commit fe62ee6423f843b3b8e8ecef9bf40cd31a531e43, just before
+spring dependency was introduced. 
+
+Since the fork the artifact has been renamed to 1.2-SWECO.
+
+To install to local maven repo:
+ > ./gradlew install
+
+---
 
 == build ==
 - Execute the following command():
