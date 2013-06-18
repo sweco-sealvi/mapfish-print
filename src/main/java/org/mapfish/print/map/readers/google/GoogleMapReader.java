@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,7 +78,7 @@ public class GoogleMapReader extends HTTPMapReader {
 
         latitude = 180 / Math.PI * (2 * Math.atan( Math.exp( latitude * Math.PI / 180.0)) - Math.PI / 2.0);
         DecimalFormat df = new DecimalFormat("#.#######################");
-        String center = df.format(latitude) + "," + df.format(longitude);
+        String center = formatCoordinateString(latitude, longitude);
         String size = Long.toString(width) + "x" + Long.toString(height);
 
         URIUtils.addParamOverride(tileParams, "center", center);
@@ -109,6 +110,14 @@ public class GoogleMapReader extends HTTPMapReader {
 
     public static void create(List<MapReader> target, RenderingContext context, PJsonObject params) {
         target.add(new GoogleMapReader("t", context, params));
+    }
+
+    public static String formatCoordinateString(final double latitude, final double longitude){
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#.#######################", symbols);
+        return df.format(latitude) + "," + df.format(longitude);
+            
     }
 
     public boolean testMerge(MapReader other) {

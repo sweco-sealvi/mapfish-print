@@ -72,7 +72,7 @@ public class GoogleMapTileReader extends TileableMapReader {
 
     	latitude = 180 / Math.PI * (2 * Math.atan( Math.exp( latitude * Math.PI / 180.0)) - Math.PI / 2.0);
     	DecimalFormat df = new DecimalFormat("#.#######################");
-    	String center = df.format(latitude) + "," + df.format(longitude);
+    	String center = GoogleMapReader.formatCoordinateString(latitude, longitude);
     	String size = Long.toString(w) + "x" + Long.toString(h);
     	
         URIUtils.addParamOverride(tileParams, "center", center);
